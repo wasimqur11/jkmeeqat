@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+    
+    <!-- Outer circle -->
+    <path
+        android:pathData="M150,150 m-140,0 a140,140 0,1,1 280,0 a140,140 0,1,1 -280,0"
+        android:fillColor="@color/surface_light"
+        android:strokeColor="@color/primary"
+        android:strokeWidth="4"/>
+    
+    <!-- Inner circle -->
+    <path
+        android:pathData="M150,150 m-120,0 a120,120 0,1,1 240,0 a120,120 0,1,1 -240,0"
+        android:fillColor="@color/background_light"
+        android:strokeColor="@color/primary_light"
+        android:strokeWidth="2"/>
+    
+    <!-- Degree markings (simplified) -->
+    <path
+        android:pathData="M150,20 L150,35"
+        android:strokeColor="@color/text_primary_light"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M280,150 L265,150"
+        android:strokeColor="@color/text_primary_light"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M150,280 L150,265"
+        android:strokeColor="@color/text_primary_light"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M20,150 L35,150"
+        android:strokeColor="@color/text_primary_light"
+        android:strokeWidth="2"/>
+    
+    <!-- Center dot -->
+    <path
+        android:pathData="M150,150 m-3,0 a3,3 0,1,1 6,0 a3,3 0,1,1 -6,0"
+        android:fillColor="@color/primary"/>
+</vector>

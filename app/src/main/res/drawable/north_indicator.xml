@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+    
+    <!-- North indicator (red arrow pointing up) -->
+    <path
+        android:pathData="M150,30 L145,50 L155,50 Z"
+        android:fillColor="@color/error"/>
+    
+    <!-- N label -->
+    <path
+        android:pathData="M145,15 L145,25 L155,25 L155,15"
+        android:strokeColor="@color/error"
+        android:strokeWidth="1"
+        android:fillColor="@android:color/transparent"/>
+</vector>

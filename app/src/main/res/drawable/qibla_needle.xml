@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+    
+    <!-- Qibla needle (green arrow pointing up) -->
+    <path
+        android:pathData="M150,40 L140,80 L160,80 Z"
+        android:fillColor="@color/success"/>
+    
+    <!-- Needle body -->
+    <path
+        android:pathData="M148,80 L152,150 L148,150 Z"
+        android:fillColor="@color/success"/>
+    
+    <!-- Opposite end -->
+    <path
+        android:pathData="M150,260 L140,220 L160,220 Z"
+        android:fillColor="@color/success"
+        android:alpha="0.5"/>
+    
+    <!-- Needle body bottom -->
+    <path
+        android:pathData="M148,220 L152,150 L148,150 Z"
+        android:fillColor="@color/success"
+        android:alpha="0.5"/>
+</vector>
