@@ -211,12 +211,12 @@ class MainActivity : AppCompatActivity() {
         val currentMinutes = currentTime.get(Calendar.HOUR_OF_DAY) * 60 + currentTime.get(Calendar.MINUTE)
         
         val prayers = listOf(
-            PrayerTimeItem("Fajr", prayerTime.fajr, R.drawable.ic_prayer),
-            PrayerTimeItem("Sunrise", prayerTime.sunrise, R.drawable.ic_prayer),
-            PrayerTimeItem("Dhuhr", prayerTime.dhuhr, R.drawable.ic_prayer),
-            PrayerTimeItem("Asr", prayerTime.asr, R.drawable.ic_prayer),
-            PrayerTimeItem("Maghrib", prayerTime.maghrib, R.drawable.ic_prayer),
-            PrayerTimeItem("Isha", prayerTime.isha, R.drawable.ic_prayer)
+            PrayerTimeItem("Fajr", prayerTime.fajr, R.drawable.ic_prayer, hasNotification = true),
+            PrayerTimeItem("Sunrise", prayerTime.sunrise, R.drawable.ic_prayer, hasNotification = false),
+            PrayerTimeItem("Dhuhr", prayerTime.dhuhr, R.drawable.ic_prayer, hasNotification = true),
+            PrayerTimeItem("Asr", prayerTime.asr, R.drawable.ic_prayer, hasNotification = true),
+            PrayerTimeItem("Maghrib", prayerTime.maghrib, R.drawable.ic_prayer, hasNotification = true),
+            PrayerTimeItem("Isha", prayerTime.isha, R.drawable.ic_prayer, hasNotification = true)
         )
         
         // Mark prayers as passed or next
