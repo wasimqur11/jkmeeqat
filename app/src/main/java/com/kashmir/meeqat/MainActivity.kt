@@ -66,15 +66,19 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun initializeComponents() {
-        database = MeeqatDatabase.getDatabase(this)
-        prayerCalculator = PrayerCalculator()
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        notificationManager = PrayerNotificationManager(this)
-        
-        prayerTimesAdapter = PrayerTimesAdapter()
-        binding.rvPrayerTimes.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = prayerTimesAdapter
+        try {
+            database = MeeqatDatabase.getDatabase(this)
+            prayerCalculator = PrayerCalculator()
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            notificationManager = PrayerNotificationManager(this)
+            
+            prayerTimesAdapter = PrayerTimesAdapter()
+            binding.rvPrayerTimes.apply {
+                layoutManager = LinearLayoutManager(this@MainActivity)
+                adapter = prayerTimesAdapter
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error initializing app: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
     
@@ -135,18 +139,23 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun findClosestKashmirLocation(lat: Double, lng: Double): Location {
-        var closestLocation = KashmirLocations.locations.first()
-        var minDistance = Double.MAX_VALUE
-        
-        for (location in KashmirLocations.locations) {
-            val distance = calculateDistance(lat, lng, location.latitude, location.longitude)
-            if (distance < minDistance) {
-                minDistance = distance
-                closestLocation = location
+        return try {
+            var closestLocation = KashmirLocations.locations.first()
+            var minDistance = Double.MAX_VALUE
+            
+            for (location in KashmirLocations.locations) {
+                val distance = calculateDistance(lat, lng, location.latitude, location.longitude)
+                if (distance < minDistance) {
+                    minDistance = distance
+                    closestLocation = location
+                }
             }
+            
+            closestLocation
+        } catch (e: Exception) {
+            // Return Srinagar as fallback
+            Location(name = "Srinagar", latitude = 34.0837, longitude = 74.7973)
         }
-        
-        return closestLocation
     }
     
     private fun calculateDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Double {
@@ -156,7 +165,8 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun useDefaultLocation() {
-        currentLocation = KashmirLocations.getLocationByName("Srinagar")
+        currentLocation = KashmirLocations.getLocationByName("Srinagar") 
+            ?: Location(name = "Srinagar", latitude = 34.0837, longitude = 74.7973)
         currentLocation?.let { location ->
             updateLocationUI(location)
             calculateAndDisplayPrayerTimes(location)
