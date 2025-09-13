@@ -47,6 +47,7 @@ jobs:
       run: ./gradlew assembleRelease
       
     - name: Sign Release APK
+      if: ${{ secrets.SIGNING_KEY != '' }}
       uses: r0adkll/sign-android-release@v1
       id: sign_app
       with:
@@ -69,7 +70,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Kashmir-Meeqat-Release
-        path: app/build/outputs/apk/release/app-release-unsigned.apk
+        path: app/build/outputs/apk/release/*.apk
         retention-days: 30
         
     - name: Upload Signed APK (if signing succeeded)
