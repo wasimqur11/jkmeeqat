@@ -122,22 +122,22 @@ class PrayerCalculator {
     private fun calculateEquationOfTime(julianDay: Double): Double {
         val n = julianDay - 2451545.0
         val l = (280.460 + 0.9856474 * n) % 360
-        val g = toRadians((357.528 + 0.9856003 * n) % 360)
-        val lambda = toRadians(l + 1.915 * sin(g) + 0.020 * sin(2 * g))
+        val g = Math.toRadians((357.528 + 0.9856003 * n) % 360)
+        val lambda = Math.toRadians(l + 1.915 * sin(g) + 0.020 * sin(2.0 * g))
         
-        val alpha = atan2(cos(toRadians(23.439)) * sin(lambda), cos(lambda))
-        val eqTime = 4 * (l - toDegrees(alpha))
+        val alpha = atan2(cos(Math.toRadians(23.439)) * sin(lambda), cos(lambda))
+        val eqTime = 4.0 * (l - Math.toDegrees(alpha))
         
         return if (eqTime > 20) eqTime - 1440 else if (eqTime < -20) eqTime + 1440 else eqTime
     }
     
     private fun calculateSolarDeclination(julianDay: Double): Double {
         val n = julianDay - 2451545.0
-        val l = toRadians((280.460 + 0.9856474 * n) % 360)
-        val g = toRadians((357.528 + 0.9856003 * n) % 360)
-        val lambda = l + toRadians(1.915 * sin(g) + 0.020 * sin(2 * g))
+        val l = Math.toRadians((280.460 + 0.9856474 * n) % 360)
+        val g = Math.toRadians((357.528 + 0.9856003 * n) % 360)
+        val lambda = l + Math.toRadians(1.915 * sin(g) + 0.020 * sin(2.0 * g))
         
-        return asin(sin(toRadians(23.439)) * sin(lambda))
+        return asin(sin(Math.toRadians(23.439)) * sin(lambda))
     }
     
     private fun calculateSolarNoon(location: Location, julianDay: Double, eqTime: Double): Double {
@@ -152,11 +152,11 @@ class PrayerCalculator {
         solarDec: Double,
         eqTime: Double
     ): Double {
-        val lat = toRadians(location.latitude)
+        val lat = Math.toRadians(location.latitude)
         val hourAngle = acos(-tan(lat) * tan(solarDec))
         
-        val timeOffset = if (sunrise) -toDegrees(hourAngle) else toDegrees(hourAngle)
-        val time = 720 + 4 * (location.longitude + timeOffset) - eqTime
+        val timeOffset = if (sunrise) -Math.toDegrees(hourAngle) else Math.toDegrees(hourAngle)
+        val time = 720.0 + 4.0 * (location.longitude + timeOffset) - eqTime
         
         return time / 60.0
     }
@@ -169,9 +169,9 @@ class PrayerCalculator {
         solarDec: Double,
         eqTime: Double
     ): Double {
-        val lat = toRadians(location.latitude)
+        val lat = Math.toRadians(location.latitude)
         val decRad = solarDec
-        val angleRad = toRadians(angle)
+        val angleRad = Math.toRadians(angle)
         
         val argument = (sin(angleRad) - sin(decRad) * sin(lat)) / (cos(decRad) * cos(lat))
         
@@ -180,8 +180,8 @@ class PrayerCalculator {
         }
         
         val hourAngle = acos(argument)
-        val timeOffset = if (morning) -toDegrees(hourAngle) else toDegrees(hourAngle)
-        val time = 720 + 4 * (location.longitude + timeOffset) - eqTime
+        val timeOffset = if (morning) -Math.toDegrees(hourAngle) else Math.toDegrees(hourAngle)
+        val time = 720.0 + 4.0 * (location.longitude + timeOffset) - eqTime
         
         return time / 60.0
     }
@@ -193,7 +193,7 @@ class PrayerCalculator {
         solarDec: Double,
         eqTime: Double
     ): Double {
-        val lat = toRadians(location.latitude)
+        val lat = Math.toRadians(location.latitude)
         val decRad = solarDec
         
         val angle = atan(1.0 / (shadowFactor + tan(abs(lat - decRad))))
@@ -204,7 +204,7 @@ class PrayerCalculator {
         }
         
         val hourAngle = acos(argument)
-        val time = 720 + 4 * (location.longitude + toDegrees(hourAngle)) - eqTime
+        val time = 720.0 + 4.0 * (location.longitude + Math.toDegrees(hourAngle)) - eqTime
         
         return time / 60.0
     }
@@ -226,9 +226,9 @@ class PrayerCalculator {
         for ((name, timeStr) in prayers) {
             if (timeStr != INVALID_TIME) {
                 try {
-                    val time = timeFormat.parse(timeStr)
+                    val parsedTime = timeFormat.parse(timeStr)
                     val cal = Calendar.getInstance().apply { 
-                        time = time
+                        time = parsedTime
                         set(Calendar.YEAR, now.get(Calendar.YEAR))
                         set(Calendar.MONTH, now.get(Calendar.MONTH))
                         set(Calendar.DAY_OF_MONTH, now.get(Calendar.DAY_OF_MONTH))

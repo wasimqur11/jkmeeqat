@@ -10,7 +10,8 @@
       "WebFetch(domain:github.com)",
       "Bash(git pull:*)",
       "Bash(curl:*)",
-      "Bash(./gradlew:*)"
+      "Bash(./gradlew:*)",
+      "Bash(java:*)"
     ],
     "deny": [],
     "ask": []
