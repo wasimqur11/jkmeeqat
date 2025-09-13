@@ -77,6 +77,10 @@ The app is designed to accept local prayer time adjustments. When local mosque/a
 - All prayer times calculated locally on device
 - No user tracking or analytics
 
+## Download APK
+
+Latest APK builds are automatically generated via GitHub Actions and available in the [Releases](https://github.com/wasimqur11/jkmeeqat/releases) section or [Actions](https://github.com/wasimqur11/jkmeeqat/actions) artifacts.
+
 ## License
 
 This app is developed for the Muslim community of Kashmir. Please use responsibly and verify prayer times with local Islamic authorities.
