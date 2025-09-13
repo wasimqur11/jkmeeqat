@@ -58,8 +58,7 @@ dependencies {
     // WorkManager for notifications
     implementation 'androidx.work:work-runtime-ktx:2.9.0'
     
-    // Prayer times calculation
-    implementation 'com.github.msarhan:ummalqura-calendar:2.0.2'
+    // Prayer times calculation - Using standard math instead of external library
     
     // ViewBinding
     implementation 'androidx.fragment:fragment-ktx:1.6.2'
